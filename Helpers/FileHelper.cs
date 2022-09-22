@@ -7,7 +7,7 @@ public static class FileHelper
     {
         // Если реестр есть 
         #pragma warning disable CA1416 // Validate platform compatibility
-        if (Registry.ClassesRoot.OpenSubKey("openDocx\\shell\\open\\command") != null)
+        if (Registry.ClassesRoot.OpenSubKey("jmuagent\\shell\\open\\command") != null)
             return true;
         else return false;
         #pragma warning restore CA1416 // Validate platform compatibility
@@ -18,9 +18,9 @@ public static class FileHelper
         // путь к файлу
         var exePath = AppDomain.CurrentDomain.BaseDirectory;
         #pragma warning disable CA1416 // Validate platform compatibility
-        Registry.ClassesRoot.CreateSubKey("openDocx").SetValue("", "");
-        Registry.ClassesRoot.CreateSubKey("openDocx").SetValue("URL Protocol", "");
-        Registry.ClassesRoot.CreateSubKey("openDocx\\shell\\open\\command").SetValue("", $"\"{exePath}open-docx.exe\" \"%1\"");
+        Registry.ClassesRoot.CreateSubKey("jmuagent").SetValue("", "");
+        Registry.ClassesRoot.CreateSubKey("jmuagent").SetValue("URL Protocol", "");
+        Registry.ClassesRoot.CreateSubKey("jmuagent\\shell\\open\\command").SetValue("", $"\"{exePath}open-docx.exe\" \"%1\"");
         #pragma warning restore CA1416 // Validate platform compatibility
     }
 

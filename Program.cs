@@ -22,7 +22,7 @@ if (!FileHelper.CheckClasses())
 if (args != null && args.Length > 0)
 {
     // отрезаем первую часть
-    var split = args[0].Split("opendocx://");
+    var split = args[0].Split("jmuagent://");
     // Делаем запрос на программу
     await ApiHelper.JsonPostWithToken("secret", "http://localhost:8085/reports-education/" + split[1], "GET", "Отчет");
 }
