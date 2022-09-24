@@ -13,16 +13,21 @@ var handle = GetConsoleWindow();
 ShowWindow(handle, 0);
 
 // Если реестр не найден, тогда создать
-if (!FileHelper.CheckClasses())
+/*if (!FileHelper.CheckClasses())
 {
     // Создать реестр
     FileHelper.CreateRegister();
 }
+*/
+
+// Создать реестр
+FileHelper.CreateRegister();
+
 // Если параметр не пустой
 if (args != null && args.Length > 0)
 {
     // отрезаем первую часть
     var split = args[0].Split("jmuagent://");
     // Делаем запрос на программу
-    await ApiHelper.JsonPostWithToken("secret", "http://localhost:8085/reports-education/" + split[1], "GET", "Отчет");
+    await ApiHelper.JsonPostWithToken("secret", "http://jmu.api.lgpu.org/reports-education/" + split[1], "GET", "Отчет");
 }
