@@ -3,7 +3,7 @@ namespace open_docx.Helpers;
 
 public static class ApiHelper
 {
-    public static async Task<bool> JsonPostWithToken(string token, string queryUrl, string httpMethod, string reportName)
+    public static async Task<bool> JsonPostWithToken(string token, string queryUrl, string httpMethod, string reportName , string typeDocuments)
     {
         #pragma warning disable SYSLIB0014 // Тип или член устарел
         var req = (HttpWebRequest)WebRequest.Create(queryUrl);    
@@ -16,7 +16,15 @@ public static class ApiHelper
 
         await using var responseStream = response.GetResponseStream();
 
-        return FileHelper.SaveReport(responseStream, reportName);
+        if (typeDocuments == "word")
+        {
+            return FileHelper.SaveReportDocx(responseStream, reportName);
+        }
+        else
+        {
+            return FileHelper.SaveReportExcel(responseStream, reportName);
+        }
+       
 
     }
 }

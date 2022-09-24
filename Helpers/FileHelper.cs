@@ -24,7 +24,7 @@ public static class FileHelper
         #pragma warning restore CA1416 // Validate platform compatibility
     }
 
-    public static bool SaveReport(Stream inputStream, string reportName)
+    public static bool SaveReportDocx(Stream inputStream, string reportName)
     {
         // Получить путь рабочего стола
         var path = "D:";
@@ -47,6 +47,33 @@ public static class FileHelper
         {
             _ = Process.Start(@$"""{docxUrl.First()}""", file);
             return  true;
+        }
+        else return false;
+
+    }
+    public static bool SaveReportExcel(Stream inputStream, string reportName)
+    {
+        // Получить путь рабочего стола
+        var path = "D:";
+
+        var file = path + $"\\documents-programm\\{reportName.Replace(" ", "_")}_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.xlsx";
+        if (Directory.Exists(path + $"\\documents-programm"))
+        {
+            using var outputFileStream = new FileStream(file, FileMode.Create);
+            inputStream.CopyTo(outputFileStream);
+        }
+        else
+        {
+            Directory.CreateDirectory(path + $"\\documents-programm");
+            using var outputFileStream = new FileStream(file, FileMode.Create);
+            inputStream.CopyTo(outputFileStream);
+        }
+        inputStream.Dispose();
+        var docxUrl = EnumerateAllFiles("C:\\Program Files", "EXCEL.EXE");
+        if (docxUrl.Any())
+        {
+            _ = Process.Start(@$"""{docxUrl.First()}""", file);
+            return true;
         }
         else return false;
 
