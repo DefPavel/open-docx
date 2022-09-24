@@ -20,12 +20,11 @@ ShowWindow(handle, 0);
 }
 */
 
-// Создать реестр
-FileHelper.CreateRegister();
-
 // Если параметр не пустой
 if (args != null && args.Length > 0)
 {
+    // Создать реестр
+    FileHelper.CreateRegister();
     // отрезаем первую часть
     var split = args[0].Split("jmuagent://");
     // Делаем запрос на программу
